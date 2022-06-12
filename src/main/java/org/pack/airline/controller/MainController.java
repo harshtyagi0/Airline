@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.pack.airline.model.User;
 import org.pack.airline.model.*;
 
 import org.pack.airline.services.*;
+
 
 @Controller
 public class MainController {
@@ -35,16 +36,55 @@ public class MainController {
 	FlightService flightService;
 	@Autowired
 	PassengerService passengerService;
+	
+	@Autowired
+	UserService usrService;
+	
 
 	@GetMapping("/")
 	public String showHomePage() {
 		return "index";
 	}
+	
+	@GetMapping("/index")
+	public String showindexPage() {
+		return "index";
+	}
+	
+	@GetMapping("/admin")
+	public String showAdminPage() {
+		return "admin";
+	}
+	
+	@GetMapping("/dash")
+	public String showDashPage() {
+		return "Dash";
+	}
+	
+	@GetMapping("/register")
+	public String showregisterPage(Model model) {
+		model.addAttribute("users", new User());
+		return "register";
+	}
+	
 
 	@GetMapping("/airport/new")
 	public String showAddAirportPage(Model model) {
 		model.addAttribute("airport", new Airport());
 		return "newAirport";
+	}
+	
+	@PostMapping("/user/new")
+	public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("errors", bindingResult.getAllErrors());
+			model.addAttribute("user", new User());
+			return "register";
+		}
+		usrService.saveUser(user);
+		model.addAttribute("users", usrService.getAllUsersPaged(0));
+		model.addAttribute("currentPage", 0);
+		return "dash";
 	}
 
 	@PostMapping("/airport/new")
