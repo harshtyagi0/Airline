@@ -85,8 +85,8 @@ i {
 	<header>
 		<a href="#default" class="logo">Fight Registration System</a>
 		<div class="header-right">
-			<a th:href="@{index}">Home</a> <a href="#contact">Search</a> <a
-				th:href="@{login}">Login</a> <a class="active" th:href="@{register}">Register</a>
+			<a class="active" th:href="@{index}">Home</a> <a th:href="@{flight/search}">Search</a>
+			<a th:href="@{login}">Login</a> <a th:href="@{register}">Register</a>
 			<a th:href="@{admin}">Admin Section</a> <a th:href="@{about}">About
 				Project</a>
 		</div>
@@ -107,8 +107,7 @@ i {
 			<tr>
 				<th>First Name : <i>*</i>
 				<td><input type="text" name=firstname
-					placeholder="Enter your FirstName" id="userFirstName"
-					th:value="${user.firstname}" required>
+					placeholder="Enter your FirstName" required>
 			</tr>
 			<tr>
 				<th>Middle Name : <i>*</i>

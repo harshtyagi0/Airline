@@ -3,13 +3,12 @@ package org.pack.airline.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.pack.airline.model.User;
 import org.pack.airline.model.*;
-
 import org.pack.airline.services.*;
-
 
 @Controller
 public class MainController {
@@ -36,55 +33,54 @@ public class MainController {
 	FlightService flightService;
 	@Autowired
 	PassengerService passengerService;
-	
+
 	@Autowired
 	UserService usrService;
-	
 
 	@GetMapping("/")
 	public String showHomePage() {
 		return "index";
 	}
-	
+
 	@GetMapping("/index")
 	public String showindexPage() {
 		return "index";
 	}
-	
+
 	@GetMapping("/admin")
 	public String showAdminPage() {
 		return "admin";
 	}
-	
+
 	@GetMapping("/dash")
 	public String showDashPage() {
 		return "Dash";
 	}
-	
+
+	@GetMapping("/about")
+	public String showaboutPage() {
+		return "about";
+	}
+
 	@GetMapping("/register")
-	public String showregisterPage(Model model) {
-		model.addAttribute("users", new User());
+	public String showRegistrationForm(Model model) {
+		model.addAttribute("user", new User());
 		return "register";
 	}
-	
+
+	@PostMapping("/user/new")
+	public String processRegister(User user) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		usrService.saveUser(user);
+		return "register_success";
+	}
 
 	@GetMapping("/airport/new")
 	public String showAddAirportPage(Model model) {
 		model.addAttribute("airport", new Airport());
 		return "newAirport";
-	}
-	
-	@PostMapping("/user/new")
-	public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
-		if(bindingResult.hasErrors()) {
-			model.addAttribute("errors", bindingResult.getAllErrors());
-			model.addAttribute("user", new User());
-			return "register";
-		}
-		usrService.saveUser(user);
-		model.addAttribute("users", usrService.getAllUsersPaged(0));
-		model.addAttribute("currentPage", 0);
-		return "dash";
 	}
 
 	@PostMapping("/airport/new")
@@ -338,7 +334,7 @@ public class MainController {
 	}
 
 	@GetMapping("/login")
-	public String showLoginPage() {
+	public String showLoginPage(Model model) {
 		return "login";
 	}
 

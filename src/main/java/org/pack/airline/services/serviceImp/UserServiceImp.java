@@ -2,7 +2,6 @@ package org.pack.airline.services.serviceImp;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.pack.airline.model.User;
 import org.pack.airline.repository.UserRepository;
 import org.pack.airline.services.UserService;

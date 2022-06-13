@@ -83,14 +83,12 @@ i{
 </head>
 <body>
 <header>
-		<a href="#default" class="logo">Fight Registration System</a>
+		<a th:href="@{index}" class="logo">Fight Registration System</a>
 		<div class="header-right">
-			<a th:href="@{index}">Home</a>
-			<a href="#contact">Search</a>
-			<a th:href="@{login}">Login</a>
-			<a th:href="@{register}">Register</a>
-			<a class="active" th:href="@{admin}">Admin Section</a>
-			<a th:href="@{about}">About Project</a>
+			<a class="active" th:href="@{index}">Home</a> <a th:href="@{flight/search}">Search</a>
+			<a th:href="@{login}">Login</a> <a th:href="@{register}">Register</a>
+			<a th:href="@{admin}">Admin Section</a> <a th:href="@{about}">About
+				Project</a>
 		</div>
 	</header>
 	<h1 align=center>Admin Login</h1>
