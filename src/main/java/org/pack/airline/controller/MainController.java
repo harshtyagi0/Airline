@@ -71,6 +71,7 @@ public class MainController {
 	@PostMapping("/user/new")
 	public String processRegister(User user) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		// String encodedPassword = passwordEncoder.encode(user.getPassword());
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
 		usrService.saveUser(user);
@@ -105,14 +106,14 @@ public class MainController {
 		return "airports";
 	}
 
-	@GetMapping("/airports")
+	@GetMapping("/admin/airports")
 	public String showAirportsList(@RequestParam(defaultValue = "0") int pageNo, Model model) {
 		model.addAttribute("airports", airportService.getAllAirportsPaged(pageNo));
 		model.addAttribute("currentPage", pageNo);
 		return "airports";
 	}
 
-	@GetMapping("/aircraft/new")
+	@GetMapping("/admin/aircraft/new")
 	public String showAddAircraftPage(Model model) {
 		model.addAttribute("aircraft", new Aircraft());
 		return "newAircraft";
@@ -197,7 +198,7 @@ public class MainController {
 		return "flights";
 	}
 
-	@GetMapping("/flights")
+	@GetMapping("/admin/flights")
 	public String showFlightsList(@RequestParam(defaultValue = "0") int pageNo, Model model) {
 		model.addAttribute("flights", flightService.getAllFlightsPaged(pageNo));
 		model.addAttribute("currentPage", pageNo);
@@ -333,13 +334,19 @@ public class MainController {
 		return "passengers";
 	}
 
-	@GetMapping("/login")
-	public String showLoginPage(Model model) {
-		return "login";
+	@GetMapping("/newPassenger")
+	public String addPassenger() {
+		return "newPassenger";
+	}
+	
+	@GetMapping("/userIndex")
+	public String userIndex() {
+		return "userIndex";
 	}
 
-	@GetMapping("fancy")
-	public String showLoginPage1() {
-		return "index";
+	@GetMapping("/admin/adminlogin")
+	public String logedin() {
+		return "adminlogin";
 	}
+
 }

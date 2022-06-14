@@ -2,8 +2,182 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/master-page}">
+<head>
+<title>Aircraft</title>
+<style>
+footer {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #483D8B;
+	color: white;
+	text-align: center;
+}
 
+header {
+	overflow: hidden;
+	background-color: #483D8B;
+	padding: 2px 1px;
+}
+
+header a {
+	float: left;
+	color: white;
+	text-align: center;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 25px;
+	border-radius: 2px;
+}
+
+header a.logo {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+header a:hover {
+	background-color: #ddd;
+	color: white;
+}
+
+header a.active {
+	background-color: dodgerblue;
+	color: white;
+}
+
+.header-right {
+	float: right;
+}
+
+@media screen and (max-width: 500px) {
+	header a {
+		float: none;
+		display: block;
+		text-align: left;
+	}
+	.header-right {
+		float: none;
+	}
+}
+
+input[type=submit] {
+	background-color: #483D8B;
+	padding: 12px 16px;
+	border: none;
+	font-size: 16px;
+	color: white;
+}
+
+th {
+	padding: 2px;
+	margin: 2px;
+}
+
+td {
+	padding: 2px;
+	margin: 2px;
+}
+
+.classone {
+	margin-top: 10px;
+	margin-left: 0px;
+	height: 60px;
+	margin-left: 20px;
+	background-color: blue;
+}
+
+.classone ul {
+	list-style-type: none;
+	margin: 5px;
+	padding: 0px;
+}
+
+.classone li h2 {
+	text-align: center;
+	margin: 0px;
+}
+
+.classone ul li {
+	float: left;
+	line-height: 60px;
+	color: white;
+	font-size: 20px;
+	text-weight: bold;
+}
+
+.classsecondary {
+	height: 300px;
+	margin-left: 20px;
+	margin-top: 5px;
+	background-color: #ADD8E6;
+	float: left;
+	width: 1325px;
+}
+
+.image {
+	margin-top: 30px;
+	margin-left: 100px;
+	background-color: red;
+	height: 240px;
+	width: 500px;
+	float: left;
+}
+
+.read {
+	height: 200px;
+	width: 500px;
+	padding: 20px;
+	margin-top: 30px;
+	margin-left: 80px;
+	float: left;
+}
+
+.image img {
+	width: 500px;
+	height: 240px;
+}
+
+.read h2 {
+	color: white;
+}
+
+.read p {
+	text-align: justify;
+	color: white;
+}
+
+.classtwo {
+	margin-top: 30px;
+	margin-left: 80px;
+	float: left;
+	margin-right: 20px;
+}
+
+.classtwo p {
+	text-align: justify;
+}
+
+img {
+	height: 43vw;
+	width: -webkit-fill-available;
+	margin-top: 1vh;
+}
+</style>
+</head>
 <body>
+	<header>
+		<a th:href="@{adminlogin}" class="logo">Fight Registration System</a>
+		<div class="header-right">
+			<a class="active" th:href="@{/admin/adminlogin}">Admin Home</a> <a
+				th:href="@{/flight/search}">Search</a> <a
+				th:href="@{/admin/airports}">Airports</a> <a
+				th:href="@{/admin/flights}">Flights</a> <a
+				th:href="@{/admin/aircraft/new}">Add Aircraft</a> <a
+				th:href="@{/logout}">Logout</a>
+
+		</div>
+	</header>
 <th:block layout:fragment="content">
     <div class="row">
         <div class="row">
