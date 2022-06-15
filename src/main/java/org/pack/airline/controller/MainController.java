@@ -61,6 +61,8 @@ public class MainController {
 	public String showaboutPage() {
 		return "about";
 	}
+	
+	
 
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
@@ -141,7 +143,7 @@ public class MainController {
 		return "aircrafts";
 	}
 
-	@GetMapping("/aircrafts")
+	@GetMapping("/admin/aircrafts")
 	public String showAircraftsList(@RequestParam(defaultValue = "0") int pageNo, Model model) {
 		model.addAttribute("aircrafts", aircraftService.getAllAircraftsPaged(pageNo));
 		model.addAttribute("currentPage", pageNo);
@@ -310,6 +312,11 @@ public class MainController {
 	
 	@GetMapping("/userIndex")
 	public String userIndex() {
+		return "userIndex";
+	}
+	
+	@GetMapping("/flight/userIndex")
+	public String userIndexP() {
 		return "userIndex";
 	}
 
