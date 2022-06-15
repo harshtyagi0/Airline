@@ -285,38 +285,7 @@ public class MainController {
 		return "confirmationPage";
 	}
 
-	@GetMapping("/flight/book/verify")
-	public String showVerifyBookingPage() {
-		return "verifyBooking";
-	}
 
-	@PostMapping("/flight/book/verify")
-	public String showVerifyBookingPageResult(@RequestParam("flightId") long flightId,
-			@RequestParam("passengerId") long passengerId, Model model) {
-
-		Flight flight = flightService.getFlightById(flightId);
-		if (flight != null) {
-			model.addAttribute("flight", flight);
-			List<Passenger> passengers = flight.getPassengers();
-			Passenger passenger = null;
-			for (Passenger p : passengers) {
-				if (p.getPassengerId() == passengerId) {
-					passenger = passengerService.getPassengerById(passengerId);
-					model.addAttribute("passenger", passenger);
-				}
-			}
-			if (passenger != null) {
-				return "verifyBooking";
-			} else {
-				model.addAttribute("notFound", "Not Found");
-				return "verifyBooking";
-			}
-		} else {
-			model.addAttribute("notFound", "Not Found");
-			return "verifyBooking";
-		}
-
-	}
 
 	@PostMapping("/flight/book/cancel")
 	public String cancelTicket(@RequestParam("passengerId") long passengerId, Model model) {
