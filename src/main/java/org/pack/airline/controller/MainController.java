@@ -149,6 +149,8 @@ public class MainController {
 		model.addAttribute("currentPage", pageNo);
 		return "aircrafts";
 	}
+	
+	
 
 	@GetMapping("/flight/new")
 	public String showNewFlightPage(Model model) {
@@ -198,6 +200,14 @@ public class MainController {
 		model.addAttribute("flights", flightService.getAllFlightsPaged(0));
 		model.addAttribute("currentPage", 0);
 		return "flights";
+	}
+	
+	@GetMapping("/passenger/delete")
+	public String deletePassenger(@PathParam("passengerId") long passengerId, long flightId, Model model) {
+		passengerService.deletePassengerById(passengerId);
+//		model.addAttribute("passenger", passengerService.getAllFlightsPaged(0));
+//		model.addAttribute("currentPage", 0);
+		return "passengers(flightId="+flightId+")";
 	}
 
 	@GetMapping("/admin/flights")
@@ -304,6 +314,8 @@ public class MainController {
 		model.addAttribute("flight", flightService.getFlightById(flightId));
 		return "passengers";
 	}
+	
+	
 
 	@GetMapping("/newPassenger")
 	public String addPassenger() {
