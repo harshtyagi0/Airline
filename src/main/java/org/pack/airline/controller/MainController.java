@@ -203,11 +203,13 @@ public class MainController {
 	}
 	
 	@GetMapping("/passenger/delete")
-	public String deletePassenger(@PathParam("passengerId") long passengerId, long flightId, Model model) {
+	public String deletePassenger(@PathParam("passengerId") long passengerId, Model model) {
 		passengerService.deletePassengerById(passengerId);
-//		model.addAttribute("passenger", passengerService.getAllFlightsPaged(0));
-//		model.addAttribute("currentPage", 0);
-		return "passengers(flightId="+flightId+")";
+		model.addAttribute("passenger", passengerService.getAllPassengersPaged(0));
+		model.addAttribute("currentPage", 0);
+		model.addAttribute("flights", flightService.getAllFlightsPaged(0));
+		model.addAttribute("currentPage", 0);
+		return "flights";
 	}
 
 	@GetMapping("/admin/flights")
@@ -322,7 +324,7 @@ public class MainController {
 		return "newPassenger";
 	}
 	
-	@GetMapping("/userIndex")
+	@GetMapping(value = {"/userIndex","flight/book/userIndex"})
 	public String userIndex() {
 		return "userIndex";
 	}

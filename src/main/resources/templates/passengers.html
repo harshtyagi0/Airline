@@ -210,7 +210,7 @@ img {
                 <td th:text="${passenger.passportNumber}"></td>
                 <td th:text="${passenger.email}"></td>
                 <td th:text="${passenger.address}"></td>
-                <td ><a th:href="@{/passenger/delete(passengerId=${passenger.passengerId}) & (flightId=${flight.flightNumber}) }"><button type="button" class="btn btn-outline-danger btn-sm"  onclick="alert('Are you sure to cancel this Ticket?')">Cancel</button></a></td>
+                <td ><a th:href="@{/passenger/delete(passengerId=${passenger.passengerId})}"><button type="button" class="btn btn-outline-danger btn-sm"  onclick="alert('Are you sure to cancel this Ticket?')">Cancel</button></a></td>
 
             </tr>
         </div>
